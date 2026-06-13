@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>랜덤 발표자 추출</title>
+    <!-- Pretendard Font -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>🎤 랜덤 발표자 추출기</h1>
+            <button id="btnOpenStudentModal" class="btn btn-outline">학생 명단 관리</button>
+        </header>
+
+        <main class="slot-container">
+            <div id="slotMachine" class="slots">
+                <!-- Slots will be generated here -->
+                <div class="slot-placeholder">준비 완료! 명단을 추가하고 추출을 시작하세요.</div>
+            </div>
+        </main>
+
+        <section class="controls">
+            <div class="control-group">
+                <label for="extractCount">추출 인원</label>
+                <select id="extractCount">
+                    <option value="1">1명</option>
+                    <option value="2">2명</option>
+                    <option value="3">3명</option>
+                    <option value="4">4명</option>
+                    <option value="5">5명</option>
+                </select>
+            </div>
+            <button id="btnExtract" class="btn btn-primary btn-large">추출 시작!</button>
+        </section>
+    </div>
+
+    <!-- Student Management Modal -->
+    <div id="studentModal" class="modal-overlay hidden">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>학생 명단 관리</h2>
+                <button class="btn-close" id="btnCloseStudentModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="desc">학생 이름을 입력하고 추가하세요. 여러 명일 경우 쉼표(,)나 줄바꿈으로 구분할 수 있습니다.</p>
+                <textarea id="studentInput" placeholder="예: 홍길동, 김철수, 이영희"></textarea>
+                <div class="modal-actions">
+                    <button id="btnAddStudents" class="btn btn-secondary">명단 추가</button>
+                    <button id="btnClearStudents" class="btn btn-danger">전체 삭제</button>
+                </div>
+                
+                <div class="student-list-container">
+                    <h3>현재 명단 (<span id="studentCount">0</span>명)</h3>
+                    <ul id="studentList">
+                        <!-- Student list items -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Secret Settings Modal -->
+    <div id="secretModal" class="modal-overlay hidden">
+        <div class="modal secret-modal">
+            <div class="modal-header">
+                <h2>🔒 비밀 설정</h2>
+                <button class="btn-close" id="btnCloseSecretModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="desc">다음 추출 시 무조건 선택될 학생의 이름을 입력하세요.<br>추출 인원만큼 쉼표(,)로 구분하여 입력합니다.</p>
+                <input type="text" id="secretInput" placeholder="예: 홍길동, 김철수">
+                <div class="modal-actions" style="margin-top: 15px;">
+                    <button id="btnSaveSecret" class="btn btn-primary">비밀 설정 저장</button>
+                    <button id="btnClearSecret" class="btn btn-outline">설정 초기화</button>
+                </div>
+                <p id="secretStatus" class="secret-status"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confetti Script -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
