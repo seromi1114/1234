@@ -25,6 +25,13 @@ const btnSaveSecret = document.getElementById('btnSaveSecret');
 const btnClearSecret = document.getElementById('btnClearSecret');
 const secretStatus = document.getElementById('secretStatus');
 
+const termsModal = document.getElementById('termsModal');
+const privacyModal = document.getElementById('privacyModal');
+const btnOpenTerms = document.getElementById('btnOpenTerms');
+const btnOpenPrivacy = document.getElementById('btnOpenPrivacy');
+const btnCloseTerms = document.getElementById('btnCloseTerms');
+const btnClosePrivacy = document.getElementById('btnClosePrivacy');
+
 // Initialize
 function init() {
     checkEthicsGuide();
@@ -304,6 +311,35 @@ function checkEthicsGuide() {
 btnAgreeGuide.addEventListener('click', () => {
     localStorage.setItem('randomPresenter_ethicsAgreed', 'true');
     ethicsGate.classList.add('hidden');
+});
+
+// Footer Modals Logic
+btnOpenTerms.addEventListener('click', (e) => {
+    e.preventDefault();
+    termsModal.classList.remove('hidden');
+});
+
+btnCloseTerms.addEventListener('click', () => {
+    termsModal.classList.add('hidden');
+});
+
+btnOpenPrivacy.addEventListener('click', (e) => {
+    e.preventDefault();
+    privacyModal.classList.remove('hidden');
+});
+
+btnClosePrivacy.addEventListener('click', () => {
+    privacyModal.classList.add('hidden');
+});
+
+// Close modals when clicking outside
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+        // If the clicked element is the overlay itself (not its children)
+        if (e.target === overlay) {
+            overlay.classList.add('hidden');
+        }
+    });
 });
 
 // Init
