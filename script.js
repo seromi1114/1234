@@ -3,6 +3,8 @@ let students = [];
 let secretQueue = [];
 
 // DOM Elements
+const ethicsGate = document.getElementById('ethicsGate');
+const btnAgreeGuide = document.getElementById('btnAgreeGuide');
 const btnOpenStudentModal = document.getElementById('btnOpenStudentModal');
 const btnCloseStudentModal = document.getElementById('btnCloseStudentModal');
 const studentModal = document.getElementById('studentModal');
@@ -25,6 +27,7 @@ const secretStatus = document.getElementById('secretStatus');
 
 // Initialize
 function init() {
+    checkEthicsGuide();
     loadStudents();
     renderStudentList();
     updateSlotPlaceholder();
@@ -290,6 +293,18 @@ function fireConfetti() {
         }, 250);
     }
 }
+
+// Ethics Gate Logic
+function checkEthicsGuide() {
+    if (localStorage.getItem('randomPresenter_ethicsAgreed') === 'true') {
+        ethicsGate.classList.add('hidden');
+    }
+}
+
+btnAgreeGuide.addEventListener('click', () => {
+    localStorage.setItem('randomPresenter_ethicsAgreed', 'true');
+    ethicsGate.classList.add('hidden');
+});
 
 // Init
 init();
